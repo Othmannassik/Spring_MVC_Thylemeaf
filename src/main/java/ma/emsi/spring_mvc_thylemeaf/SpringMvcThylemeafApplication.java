@@ -19,8 +19,11 @@ public class SpringMvcThylemeafApplication {
     @Bean
     CommandLineRunner start(PatientRepository patientRepository){
         return args -> {
-            patientRepository.save(new Patient(null, "othman", new Date(), false, 783));
-            patientRepository.save(new Patient(null, "othman2", new Date(), true, 387));
+            patientRepository.save(new Patient(null, "Othman", new Date(), false, 203));
+            patientRepository.save(new Patient(null, "Aya", new Date(), true, 49));
+            patientRepository.save(new Patient(null, "Imrane", new Date(), true, 38));
+            patientRepository.save(new Patient(null, "Zaineb", new Date(), false, 378));
+            patientRepository.save(new Patient(null, "AYoub", new Date(), true, 25));
         };
     }
 }
