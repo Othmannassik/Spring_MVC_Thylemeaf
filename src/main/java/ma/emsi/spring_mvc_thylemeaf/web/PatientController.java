@@ -47,9 +47,22 @@ public class PatientController {
     }
 
     @PostMapping(path = "/save")
-    public String save(@Valid Patient patient, BindingResult bindingResult, Model model){
+    public String save(@Valid Patient patient, BindingResult bindingResult, Model model,
+                       @RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "") String keyword){
         if (bindingResult.hasErrors()) return "formPatient";
         patientRepository.save(patient);
-        return "redirect:/patients";
+        return "redirect:/patients?page="+page+"&keyword="+keyword;
     }
+
+    @GetMapping("/editPatient")
+    public String editPatient(Long id, int page, String keyword,Model model){
+        Patient patient=patientRepository.findById(id).orElse(null);
+        if(patient == null) throw new RuntimeException("Patient Inexistant");
+        model.addAttribute("patient",patient);
+        model.addAttribute("page", page);
+        model.addAttribute("keyword", keyword);
+        return "editPatient";
+    }
+
 }
